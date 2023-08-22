@@ -1,0 +1,87 @@
+/* Reset some default styles */
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Set a background color and font for the entire page */
+body {
+    background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+/* Style the main heading */
+h1 {
+    font-size: 28px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+/* Style the section headings */
+h2 {
+    font-size: 24px;
+    margin: 20px 0 10px;
+}
+
+/* Style the form labels */
+label {
+    font-weight: bold;
+}
+
+/* Style the input fields */
+input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+/* Style the save button */
+input[type="button"] {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="button"]:hover {
+    background-color: #0056b3;
+}
+
+/* Style the table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+/* Center align the summary section */
+h1 + div {
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Add some spacing around the summary divs */
+#qtdMenorQue50, #nomeProdutoEntre50e100, #mediaPrecoAcimaDe100 {
+    font-weight: bold;
+    text-align: center; /* Center align the text within the summary divs */
+    margin: 5px 0;
+}
+
+/* Add some spacing between the summary divs */
+#nomeProdutoEntre50e100 {
+    margin-top: 20px;
+}

@@ -1,0 +1,25 @@
+$container-max-width: 1200px;
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+
+    .row{
+        margin-top:20px
+    }
+
+    .table{
+        width: 100%;
+    }
+}
+
+.navbar{
+    justify-content: space-between;
+
+    .navbar-brand{
+        margin-right: 20px;
+    }
+}
+

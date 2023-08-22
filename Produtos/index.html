@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos</title>
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+    <h1>Cadastrar Produtos</h1>
+
+    <hr />
+
+    <label for="nome-produto">Nome do Produto: </label>
+    <input type="text" id="nomeProduto"> <br/>
+
+    <label for="valor-produto">Valor do Produto: </label>
+    <input type="text" id="valorProduto"> <br/>
+
+    <input type="button" value="Salvar" onclick="salvarProduto()" />
+
+    <hr />
+
+    <h1>Relatório</h1>
+    <table id="produtos" border="1">
+
+    </table>
+
+    <h1>Resumo</h1>
+    <div>Quantidade menor que R$50: <span id="qtdMenorQue50"></span> </div>
+    <div>Nome dos Produtos entre R$50 a R$100: <span id="nomeProdutoEntre50e100"></span> </div>
+    <div>Média acima de R$ 100: <span id="mediaPrecoAcimaDe100"></span> </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/produto.js"></script>
+</body>
+</html>
