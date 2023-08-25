@@ -3,33 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nodejs Crud App</title>
+    <title>CRUD de Endereços</title>
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-   <h1>Tarefas</h1>
-   <ul>
-    <% tasks.forEach(task => { %>
-        <li>
-            <strong><%= task.title %></strong>: <%= task.description %>
-            <a href="/edit/<%= task.id %>">Edit</a>
-            <form action="/delete/<%= task.id %>" method="POST" style="display: inline;" >
-                <button type="submit">
-                    Delete
-                </button>
-
-            </form>
-        </li>
-    <% }); %>  
-   </ul> 
-
-   <h2>Add Task</h2>
-   <form action="/" method="POST">
-        <label for="title">Title: </label>
-        <input type="text" id="title" name="title" required><br/>
-        <label for="description">Description: </label>
-        <input type="text" id="description" name="description" required><br/>
-        <input type="submit" value="Add Task" />
+   <h1>CRUD de Endereços</h1>
+   <form action="/add" method="POST">
+        <label for="cep">CEP: </label>
+        <input type="text" id="cep" name="cep" required>
+        <button type="submit">Adicionar Endereço</button>
    </form>
 
+   <ul>
+        <% addresses.forEach(address => { %>
+        <li>
+            <%= address.logradouro %>, <%= address.bairro %>, <%= address.localidade %>, <%= address.uf %>
+            <form action="/delete/<%= address.id %>" method="POST" style="display: inline;">
+                <button type="submit">
+                    Deletar
+                </button>
+            </form>
+        </li>
+        <% }); %>
+   </ul>
 </body>
 </html>

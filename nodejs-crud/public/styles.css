@@ -1,10 +1,73 @@
-input[type='submit']{
-    padding: 5px;
-    background-color: #ff0000;
-    color: #fff;
+/* Definindo um fundo e estilos para o corpo da página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Estilo para o cabeçalho da página */
+  header {
+    background-color: #2196f3;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+  }
+  
+  /* Estilo para o formulário de adicionar endereço */
+  form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  button[type="submit"] {
+    background-color: #4caf50;
+    color: white;
     border: none;
-    border-radius: 4px;
+    padding: 10px 20px;
+    border-radius: 5px;
     cursor: pointer;
-    margin-left: 5px;
-
-}
+    transition: background-color 0.3s;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  
+  /* Estilo para a lista de endereços */
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    background-color: white;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  form.delete-form {
+    margin: 0;
+    padding: 0;
+  }
+  
