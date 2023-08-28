@@ -51,22 +51,23 @@ app.post('/add', async (req, res) => {
 
 app.get('/edit/:id', (req, res) => {
     const addressId = req.params.id;
-    const sql = 'SELECT * FROM address WHERE id = ?';
-    db.query(sql, [addressId], (err, resul) => {
-        if(err) throw err;
-        res.render('edit', {address: result[0]});
+    const sql = 'SELECT * FROM addresses WHERE id = ?';
+    db.query(sql, [addressId], (err, result) => {
+        if (err) throw err;
+        res.render('edit', { address: result[0] }); // assuming you have an 'edit' template
     });
 });
 
-app.put('update/:id', (req, res) => {
+app.put('/update/:id', (req, res) => {
     const addressId = req.params.id;
-    const sql = 'UPDATE addresses SET logradouro = ?, bairro= ?, localidade=?, uf=? WHERE id=?';
-    db.query(sql, [addressId], (err, result) => {
+    const { logradouro, bairro, localidade, uf } = req.body; // Retrieve updated data from form
+    
+    const sql = 'UPDATE addresses SET logradouro = ?, bairro = ?, localidade = ?, uf = ? WHERE id = ?';
+    db.query(sql, [logradouro, bairro, localidade, uf, addressId], (err, result) => {
         if (err) throw err;
-        console.log('Address deleted');
-     res.redirect('/');
+        console.log('Address updated');
+        res.redirect('/');
     });
-
 });
 
 app.post('/delete/:id', (req, res) => {
@@ -80,5 +81,5 @@ app.post('/delete/:id', (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Servidor executando na porta ${port}`);
+    console.log(`Server is running on port ${port}`);
 });

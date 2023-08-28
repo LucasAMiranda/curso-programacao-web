@@ -48,6 +48,11 @@ body {
   button[type="submit"]:hover {
     background-color: #45a049;
   }
+
+  button a{
+    text-decoration: none;
+    color: white;
+  }
   
   /* Estilo para a lista de endereços */
   ul {
