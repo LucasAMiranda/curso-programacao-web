@@ -1,25 +1,54 @@
-import logo from './logo.svg';
+import { useState } from "react";
+import AddressForm from "./components/AddressForm";
+import AddressDetail from "./components/AddressDetail";
+import {Container, Typography, Paper} from '@mui/material';
+import {styled} from '@mui/material/styles';
 import './App.css';
 
-function App() {
+const StyledContainer = styled(Container)(({ theme }) =>({
+    textAlign: 'center',
+    padding: theme.spacing(3)
+}));
+
+const StyledPaper = styled(Paper)(( {theme} ) => ({
+    padding: theme.spacing(2),
+    marginBottom: theme.spacing(3),
+}));
+
+
+const App = () => {
+
+  const [address, setAddress] = useState(null);
+
+  const searchAddress = async (cep) =>{
+    try{
+      const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+      const data = await response.json();
+      setAddress(data)
+    }catch(error){
+      console.error('Erro ao buscar endereço: ', error)
+    }
+  }
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <StyledContainer>
+       <StyledPaper elevation={3}>
+           <Typography variant="h4" gutterBottom>
+              Busca de Endereço
+           </Typography>
+        
+              <AddressForm onSearch={searchAddress} />
+         
+       </StyledPaper>
+       {address && (
+          <StyledPaper elevation={3}>
+            <AddressDetail address={address} />
+          </StyledPaper>
+       )}
+    </StyledContainer>
+   
   );
+
 }
 
 export default App;
