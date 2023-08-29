@@ -8,7 +8,7 @@ const App = () => {
       <Routes>
         <Route path="/cart" element={<Cart />} />
       </Routes>
-    
+  
   );
 };
 

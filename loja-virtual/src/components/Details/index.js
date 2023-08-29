@@ -4,9 +4,6 @@ import { Button } from 'react-bootstrap';
 import './styles.css';
 
 function Detail(props) {
-    const { detailProduct, addToCart } = props;
-    const { _id, nome, descricao, img, preco, inCart } = detailProduct;
-
     return (
         <div className="container">
             <div className="col-10 mx-auto text-center">

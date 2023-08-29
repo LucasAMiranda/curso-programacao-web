@@ -3,8 +3,6 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import "./styles.css";
 
 function Cart(props) {
-    const { cart, cartSubTotal, decrement, increment, removeItem } = props;
-
     return (
         <section>
             {cart.length > 0 ? (
