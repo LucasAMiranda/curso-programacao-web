@@ -32,3 +32,4 @@ function FilterProduct({plural_name, singular_name, categories, functionFilter})
         </form>
     )
 }
+export default FilterProduct;

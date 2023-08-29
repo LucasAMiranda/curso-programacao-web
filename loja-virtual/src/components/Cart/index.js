@@ -2,86 +2,107 @@ import React from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import "./styles.css";
 
+function Cart(props) {
+    const { cart, cartSubTotal, decrement, increment, removeItem } = props;
 
-function Cart() {
-    
     return (
         <section>
-                {value => {
-                    if (value.cart.length > 0) {
-                        return (
-                            <div>
-                                <div><h1>Seu Carrinho</h1></div>
-                                <div className="container-fluid text-center">
-                                    <div className="row">
-                                        <div className="col-10 max-auto col-lg-2">
-                                            <strong>Produto</strong>
-                                        </div>
-                                        <div className="col-10 max-auto col-lg-2">
-                                            <strong>Nome do produto</strong>
-                                        </div>
-                                        <div className="col-10 max-auto col-lg-2">
-                                            <strong>Preço</strong>
-                                        </div>
-                                        <div className="col-10 max-auto col-lg-2"> 
-                                            <strong>Quantidade</strong>
-                                        </div>
-                                        <div className="col-10 max-auto col-lg-2">
-                                            <strong>Remover</strong>
-                                        </div>
-                                        <div className="col-10 max-auto col-lg-2">
-                                            <strong>Total</strong>
-                                        </div>
-                                    </div>
-                                </div>
-                                {value.cart.map(cartData => {
-                                    return (
-                                        <div className="container-fluid text-center">
-                                            <div className="row">
-                                                <div className="col-10 max-auto col-lg-2">
-                                                     <img style={{ width:"6rem", height:"4rem"}} src={cartData.img} className="img-fluid" alt="imagem_produto"></img>
-                                                </div>
-                                                <div className="col-10 max-auto col-lg-2">
-                                                    {cartData.nome}
-                                                </div>
-                                                <div className="col-10 max-auto col-lg-2">
-                                                    R$ {cartData.preco}
-                                                </div>
-                                                <div className="col-10 max-auto col-lg-2">
-                                                    <input input type="button" id="btn_menos" name="btn_menos"  value="-" onClick={() => value.decrement(cartData._id)} />
-                                                    {cartData.count}
-                                                    <input type="button" id="btn_mais" name="btn_mais"  value="+" onClick={() => value.increment(cartData._id)}/>
-                                                </div>
-                                                <div className="col-10 max-auto col-lg-2">
-                                                    <Button variant="secondary" onClick={()=> {value.removeItem(cartData._id)}} size="sm">Remover</Button>
-                                                </div>
-                                                <div className="col-10 max-auto col-lg-2">
-                                                R$ {parseFloat(cartData.total.toFixed(2))}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )
-                                })}
-                                <hr></hr>
-                                <Container>
-                                    <Row>
-                                        <Col id="total">
-                                            <strong >Total  </strong>R$ {parseFloat(value.cartSubTotal.toFixed(2))}
-                                        </Col>
-                                    </Row>
-                                </Container>
-                            </div>
-                        )
-                    } else {
-                        return (
-                            <div id="vazio">
-                                <h3> Atualmente o seu carrinho de compras está <span style={{color:"red"}}>Vazio</span></h3>
-                            </div>
-                        )
-                    }
-                }}
+            {cart.length > 0 ? (
+                <div>
+                    <div>
+                        <h1>Seu Carrinho</h1>
+                    </div>
+                    <Container fluid className="text-center">
+                        <Row>
+                            <Col className="col-10 max-auto col-lg-2">
+                                <strong>Produto</strong>
+                            </Col>
+                            <Col className="col-10 max-auto col-lg-2">
+                                <strong>Nome do produto</strong>
+                            </Col>
+                            <Col className="col-10 max-auto col-lg-2">
+                                <strong>Preço</strong>
+                            </Col>
+                            <Col className="col-10 max-auto col-lg-2">
+                                <strong>Quantidade</strong>
+                            </Col>
+                            <Col className="col-10 max-auto col-lg-2">
+                                <strong>Remover</strong>
+                            </Col>
+                            <Col className="col-10 max-auto col-lg-2">
+                                <strong>Total</strong>
+                            </Col>
+                        </Row>
+                    </Container>
+                    {cart.map((cartData) => (
+                        <Container fluid className="text-center" key={cartData._id}>
+                            <Row>
+                                <Col className="col-10 max-auto col-lg-2">
+                                    <img
+                                        style={{ width: "6rem", height: "4rem" }}
+                                        src={cartData.img}
+                                        className="img-fluid"
+                                        alt="imagem_produto"
+                                    />
+                                </Col>
+                                <Col className="col-10 max-auto col-lg-2">
+                                    {cartData.nome}
+                                </Col>
+                                <Col className="col-10 max-auto col-lg-2">
+                                    R$ {cartData.preco}
+                                </Col>
+                                <Col className="col-10 max-auto col-lg-2">
+                                    <Button
+                                        variant="secondary"
+                                        onClick={() => decrement(cartData._id)}
+                                        size="sm"
+                                    >
+                                        -
+                                    </Button>{" "}
+                                    {cartData.count}{" "}
+                                    <Button
+                                        variant="secondary"
+                                        onClick={() => increment(cartData._id)}
+                                        size="sm"
+                                    >
+                                        +
+                                    </Button>
+                                </Col>
+                                <Col className="col-10 max-auto col-lg-2">
+                                    <Button
+                                        variant="secondary"
+                                        onClick={() => removeItem(cartData._id)}
+                                        size="sm"
+                                    >
+                                        Remover
+                                    </Button>
+                                </Col>
+                                <Col className="col-10 max-auto col-lg-2">
+                                    R$ {parseFloat(cartData.total.toFixed(2))}
+                                </Col>
+                            </Row>
+                        </Container>
+                    ))}
+                    <hr />
+                    <Container>
+                        <Row>
+                            <Col id="total">
+                                <strong>Total</strong> R${" "}
+                                {parseFloat(cartSubTotal.toFixed(2))}
+                            </Col>
+                        </Row>
+                    </Container>
+                </div>
+            ) : (
+                <div id="vazio">
+                    <h3>
+                        Atualmente o seu carrinho de compras está{" "}
+                        <span style={{ color: "red" }}>Vazio</span>
+                    </h3>
+                </div>
+            )}
         </section>
-    )
+    );
 }
 
 export default Cart;
