@@ -1,36 +1,15 @@
-import React, { useState } from 'react';
-import Product from './components/Product';
-import ProductList from './components/ProductList';
-import ProductDetail from './components/ProductDetail';
-import RelatedProducts from './components/RelatedProduct';
+import React from 'react';
+import { Routes, Route } from "react-router-dom";
 import Cart from './components/Cart';
 import './App.css';
 
-function App() {
-  const [selectedProduct, setSelectProduct] = useState(null);
-  const [cartItems, setCartItems] = useState([]);
-
-  const handleProductSelect = (product) => {
-    selectedProduct(product);
-  };
-
-  const handleAddToCart = (product) => {
-    setCartItems([...cartItems, product]);
-  };
-
+const App = () => {
   return (
-    <div className="app">
-        <ProductList products={products} onSelectedProduct={handleProductSelect} />
-        {selectedProduct && (
-          <ProductDetail product={selectedProduct} />
-        )}
-        {selectedProduct && (
-          <button onClick={() => handleAddToCart(selectedProduct)}>Adicionar ao Carrinho</button>
-        )}
-        <RelatedProducts relatedProducts={relatedProducts} />
-        <Cart cartItems={cartItems} />
-    </div>
+      <Routes>
+        <Route path="/cart" element={<Cart />} />
+      </Routes>
+    
   );
-}
+};
 
 export default App;
