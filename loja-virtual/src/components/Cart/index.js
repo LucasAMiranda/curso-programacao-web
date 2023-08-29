@@ -39,6 +39,9 @@ function Cart() {
                                         <div className="container-fluid text-center">
                                             <div className="row">
                                                 <div className="col-10 max-auto col-lg-2">
+                                                     <img style={{ width:"6rem", height:"4rem"}} src={cartData.img} className="img-fluid" alt="imagem_produto"></img>
+                                                </div>
+                                                <div className="col-10 max-auto col-lg-2">
                                                     {cartData.nome}
                                                 </div>
                                                 <div className="col-10 max-auto col-lg-2">
