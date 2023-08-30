@@ -26,7 +26,7 @@ class ThemedButton extends React.Component{
     toggleTheme = () =>{
         this.setState(state => ({
             theme:
-                state.theme == themes.dark
+                state.theme === themes.dark
                 ? themes.light
                 : themes.dark,
         }));
