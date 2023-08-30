@@ -1,10 +1,12 @@
 import React from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
+import {ProductConsumer} from '../../contextApi';
 import "./styles.css";
 
-function Cart(props) {
+function Cart({ cart, decrement, increment, removeItem, cartSubTotal }) {
     return (
         <section>
+            <ProductConsumer>
             {cart.length > 0 ? (
                 <div>
                     <div>
@@ -99,6 +101,7 @@ function Cart(props) {
                     </h3>
                 </div>
             )}
+            </ProductConsumer>
         </section>
     );
 }
