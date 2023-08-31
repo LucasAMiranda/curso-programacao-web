@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+import { Button, Container, Row, Col } from 'react-bootstrap';
 import { ProductConsumer } from '../../contextApi';
-import './styles.css';
+import ThemeContext from '../../context/ThemeContext'; // Certifique-se de que o caminho está correto
 
 function Detail(props) {
+    const themeContext = useContext(ThemeContext);
+
     return (
         <ProductConsumer>
             {(value) => {
@@ -12,42 +14,37 @@ function Detail(props) {
                 const id = _id;
 
                 return (
-                    <div className="container">
-                        <div className="col-10 mx-auto text-center">
-                            <h1>Detalhes do {nome}</h1>
-                        </div>
-
-                        <div className="row">
-                            <div className="col-4 mx-auto col-md-4">
+                    <Container className="mt-5" style={{ color: themeContext.theme.foreground, background: themeContext.theme.background }}>
+                        <Row className="justify-content-center">
+                            <Col xs={10} md={6} lg={4} className="text-center">
                                 <img src={img} className="img-fluid" alt="produto" />
-                            </div>
-                        </div>
-
-                        <div className="row">
-                            <div className="col-10 mx-auto text-center">
+                            </Col>
+                            <Col xs={10} md={6} lg={6} className="text-center mt-3">
+                                <h1 style={{ marginRight: '5em'}}>Detalhes do {nome}</h1>
                                 <h3>{nome}</h3>
                                 <h5>
-                                    <strong>Preço : R$ {preco}</strong>
+                                    <strong>Preço: R$ {preco}</strong>
                                 </h5>
                                 <h6>Descrição do Produto:</h6>
-                                <div id="dsc">{descricao}</div>
-                                <div>
-                                    <Link id="lk" to="/">
+                                <div>{descricao}</div>
+                                <div className="mt-3">
+                                    <Link to="/" className="btn btn-outline-primary">
                                         Voltar para página de produtos
                                     </Link>
-
+                                </div>
+                                <div className="mt-3" style={{ marginLeft: '250px' }}>
                                     <Button
                                         size="sm"
                                         disabled={inCart}
-                                        onClick={() => value.addToCart(id)} // Use value.addToCart from the context
-                                        variant="secondary"
+                                        onClick={() => value.addToCart(id)}
+                                        variant={inCart ? "success" : "secondary"}
                                     >
-                                        {inCart ? <span>No Carrinho</span> : <span>Adicionar ao Carrinho</span>}
+                                        {inCart ? 'No Carrinho' : 'Adicionar ao Carrinho'}
                                     </Button>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
+                            </Col>
+                        </Row>
+                    </Container>
                 );
             }}
         </ProductConsumer>

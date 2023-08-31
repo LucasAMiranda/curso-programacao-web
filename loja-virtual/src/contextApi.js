@@ -46,14 +46,16 @@ function ProductProvider(props) {
     function addToCart(id) {
         let tempProductList = [...productList];
         const index = tempProductList.findIndex(item => item._id === id);
-        const product = tempProductList[index];
-        
-        product.inCart = true;
-        product.count = 1;
-        product.total = product.preco;
 
-        setProductList(tempProductList);
-        setCart([...cart, product]);
+        if (index !== -1) { // Verificar se o produto foi encontrado
+            const product = tempProductList[index];
+            product.inCart = true;
+            product.count = 1;
+            product.total = product.preco;
+
+            setProductList(tempProductList);
+            setCart([...cart, product]);
+        }
     }
 
     function increment(id) {
