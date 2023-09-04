@@ -1,0 +1,16 @@
+.FormInputs{
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-evenly;
+  margin: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.MinhaLabel{
+  margin: 16px;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+}
