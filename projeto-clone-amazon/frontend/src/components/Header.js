@@ -1,52 +1,50 @@
-import React from "react";
-import SearchIcon from "@mui/icons-material/Search"; // Importação corrigida
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined"; // Importação corrigida
-import { Link } from "react-router-dom";
-import "../components/Header.css";
+import React from 'react';
+import './Header.css';
+import SearchIcon from '@mui/icons-material/Search';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import {Link} from "react-router-dom";
+import { useStateValue } from '../StateProvider';
 
-/*import useStateValue  from "../src/StateProvider";*/
+function Header() {
+    const basket = useStateValue();
 
-
-const Header = () =>{
-    //const [{basket}, dispatch] = useStateValue();
-
-    return (
-        //Logo Amazon
+    return (        
         <div className="header">
-            <Link to="/"> 
-                <img src="./amazon-logo-main.png" className="header-logo"  alt="Amazon Logo"></img>
-            </Link>
-       
+            <Link to="/">
+                <img src="./amazon-logo-main.png" className="header-logo" alt="imagem-logo-amazon" />
+            </Link> 
+            
+
             <div className="header-search">
                 <input className="header-searchInput" type="text" />
                 <SearchIcon className="header-search-icon" />
             </div>
 
             <div className="header-nav">
-                <div className="header-option-one">
+                <div className=" header-option-main">
                     <span className="header-option-one">Hello, Lucas</span>
                     <span className="header-option-two">Sign In</span>
                 </div>
-            </div>
 
-            <div className="header-option">
-                <span className="header-option-one">Returns</span>
-                <span className="header-option-two">& Orders</span>
-            </div>
+                <div className="header-option">
+                    <span className="header-option-one">Returns</span>
+                    <span className="header-option-two">& Orders</span>
+                </div>
 
-            <div className="header-option">
-                <span className="header-option-one">Your</span>
-                <span className="header-option-two">Prime</span>
+                <div className="header-option">
+                    <span className="header-option-one">Your</span>
+                    <span className="header-option-two">Prime</span>
+                </div>
             </div>
 
             <Link to="/checkout" className="link">
-                <div className="header-obtion-basket">
+                <div className="header-option-basket">
                     <ShoppingCartOutlinedIcon className="header-basket-icon" />
-                    <span className="header-option-two header-basket-cout"></span> 
+                    <span className="header-option-two header-basket-count">{basket?.length}</span>
                 </div>
             </Link>
-
         </div>
     )
 }
-export default Header;
+
+export default Header

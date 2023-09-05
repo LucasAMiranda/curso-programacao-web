@@ -3,7 +3,10 @@ import BaseService from '../src/services/api';
 
 const ProductContext = React.createContext();
 
-function ProductProvider(props) {
+const productService = new BaseService();
+
+function ProductProvider({children}) {
+
     const [products, setProducts] = useState([]);
     const [detailProduct, setDetailProduct] = useState({});
     const [cart, setCart] = useState([]);
@@ -16,7 +19,7 @@ function ProductProvider(props) {
 
     useEffect(() => {
         let path = `/produtos?page=${page}`;
-        BaseService.getProducts(path)
+        productService.getProducts(path)
             .then(res => setProducts(res.data.docs))
             .catch(error => console.log(error))
     }, [page]);
@@ -113,14 +116,14 @@ function ProductProvider(props) {
             detailProduct,
             cart,
             cartSubTotal,
-            handleDetails,
-            addToCart,
-            increment,
-            decrement,
-            removeItem,
-            filter,
+            handleDetails: handleDetails,
+            addToCart: addToCart,
+            increment: increment,
+            decrement: decrement,
+            removeItem: removeItem,
+            filter: filter
         }}>
-            {props.children}
+            {children}
         </ProductContext.Provider>
     );
 }

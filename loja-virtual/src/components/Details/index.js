@@ -1,54 +1,27 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { Button, Container, Row, Col } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 import { ProductConsumer } from '../../contextApi';
-import ThemeContext from '../../context/ThemeContext'; // Certifique-se de que o caminho está correto
 
-function Detail(props) {
-    const themeContext = useContext(ThemeContext);
+function Details() {
+    const { id } = useParams(); // Captura o ID da URL
+    const productContext = useContext(ProductConsumer);
+
+    // Encontre o produto correspondente com base no ID
+    const product = productContext.productList.find(item => item.id === parseInt(id));
+
+    if (!product) {
+        return <div>Produto não encontrado.</div>;
+    }
 
     return (
-        <ProductConsumer>
-            {(value) => {
-                const { _id, nome, descricao, img, preco, inCart } = value.detailProduct;
-                const id = _id;
-
-                return (
-                    <Container className="mt-5" style={{ color: themeContext.theme.foreground, background: themeContext.theme.background }}>
-                        <Row className="justify-content-center">
-                            <Col xs={10} md={6} lg={4} className="text-center">
-                                <img src={img} className="img-fluid" alt="produto" />
-                            </Col>
-                            <Col xs={10} md={6} lg={6} className="text-center mt-3">
-                                <h1 style={{ marginRight: '5em'}}>Detalhes do {nome}</h1>
-                                <h3>{nome}</h3>
-                                <h5>
-                                    <strong>Preço: R$ {preco}</strong>
-                                </h5>
-                                <h6>Descrição do Produto:</h6>
-                                <div>{descricao}</div>
-                                <div className="mt-3">
-                                    <Link to="/" className="btn btn-outline-primary">
-                                        Voltar para página de produtos
-                                    </Link>
-                                </div>
-                                <div className="mt-3" style={{ marginLeft: '250px' }}>
-                                    <Button
-                                        size="sm"
-                                        disabled={inCart}
-                                        onClick={() => value.addToCart(id)}
-                                        variant={inCart ? "success" : "secondary"}
-                                    >
-                                        {inCart ? 'No Carrinho' : 'Adicionar ao Carrinho'}
-                                    </Button>
-                                </div>
-                            </Col>
-                        </Row>
-                    </Container>
-                );
-            }}
-        </ProductConsumer>
+        <div>
+            <h2>Detalhes do Produto</h2>
+            <h3>{product.nome}</h3>
+            <p>{product.descricao}</p>
+            <img src={product.img} alt={product.nome} />
+            {/* Renderize os outros detalhes do produto aqui */}
+        </div>
     );
 }
 
-export default Detail;
+export default Details;

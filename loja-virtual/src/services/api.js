@@ -5,15 +5,14 @@ class BaseService {
         this.baseUrl = "http://localhost:3001";
     }
 
-    getProducts = async path => {
+    async getProducts(path) {
         let url = `${this.baseUrl}${path}`;
         let response = await axios.get(url)
             .catch(error => console.log("ERRO AO TENTAR BUSCAR DADOS DA API " + error));
 
         return response;
-    };
+    }
 }
 
-const instance = new BaseService(); // Criar uma instância da classe
+export default BaseService;
 
-export default instance; // Exportar a instância da classe
