@@ -5,14 +5,19 @@ import React, { createContext, useContext, useReducer } from "react";
 export const StateContext = createContext();
 
 // Estado inicial e função redutora
-const initialState = {
+export const initialState = {
   basket: [],
   // outros estados, se necessário
 };
 
+const actionTypes = {
+  ADD_TO_BASKET: "ADD_TO_BASKET",
+  // outros tipos de ação, se necessário
+};
+
 const reducer = (state, action) => {
   switch (action.type) {
-    case "ADD_TO_BASKET":
+    case actionTypes.ADD_TO_BASKET:
       return {
         ...state,
         basket: [...state.basket, action.item],
@@ -24,7 +29,7 @@ const reducer = (state, action) => {
 };
 
 // Componente StateProvider
-export const StateProvider = ({ children }) => {
+export const StateProvider = ({ children, reducer }) => { // Adicione o argumento 'reducer'
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (

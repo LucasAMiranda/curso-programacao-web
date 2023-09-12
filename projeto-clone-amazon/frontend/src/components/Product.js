@@ -3,8 +3,9 @@ import "./Product.css";
 import StarIcon from "@mui/icons-material/Star";
 import { useStateValue } from "../StateProvider";
 
+
 const Product = ({ id, title, image, price, rating, author, subtitle }) => {
-  const dispatch = useStateValue();
+  const  {dispatch} = useStateValue(); // Desestruture apenas o dispatch
 
   const addToBasket = () => {
     dispatch({
@@ -17,6 +18,10 @@ const Product = ({ id, title, image, price, rating, author, subtitle }) => {
         rating,
       },
     });
+  };
+
+  const handleAddToBasket = () => {
+    dispatch(addToBasket(id, title, image, price, rating));
   };
 
   return (
@@ -41,7 +46,7 @@ const Product = ({ id, title, image, price, rating, author, subtitle }) => {
         </div>
       </div>
       <img src={image} alt="imagem-do-produto" />
-      <button onClick={addToBasket}>Adicionar ao Carrinho</button>
+      <button onClick={handleAddToBasket}>Adicionar ao Carrinho</button>
     </div>
   );
 };
