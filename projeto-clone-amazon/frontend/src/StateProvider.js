@@ -38,6 +38,8 @@ export const StateProvider = ({ children, reducer }) => { // Adicione o argument
     </StateContext.Provider>
   );
 };
+export default reducer;
 
 // Gancho personalizado para acessar o estado
 export const useStateValue = () => useContext(StateContext);
+
