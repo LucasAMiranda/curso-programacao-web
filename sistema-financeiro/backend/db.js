@@ -1,24 +1,20 @@
 const mongoose = require('mongoose');
-require('dotenv').config();
-const mongoURI = process.env.MONGODB_URI;
+require('dotenv').config(); // Carrega as variáveis de ambiente do arquivo .env
 
-mongoose.connect(mongoURI, {
+const dbURI = process.env.MONGODB_URI;
+
+mongoose.connect(dbURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
-  useFindAndModify: false,
 });
 
-
 const db = mongoose.connection;
-console.log('Valor de MONGODB_URI:', db);
 
 db.on('error', (error) => {
-  console.error('Erro na conexão com o MongoDB:', error);
+  console.error('Erro de conexão com o MongoDB:', error);
 });
 
 db.once('open', () => {
-  console.log('Conexão com o MongoDB estabelecida com sucesso');
+  console.log('Conexão com o MongoDB estabelecida com sucesso!');
 });
-
-module.exports = db;
