@@ -1,31 +1,25 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-</script>
-
 <template>
   <div id="app">
       <nav class="navbar navbar-expand navbar-dark bg-dark">
-         <router-link to="/" class="navbar-brand">Tutorial de Desenvolvimento Web</router-link>
-         <div class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <router-link to="/tutorials" class="nav-link">Tutorials</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/add" class="nav-link">Add</router-link>
-            </li>
-         </div>
+        <router-link to="/" class="navbar-brand">LucasDev</router-link>
+        <div class="navbar-nav mr-auto">
+           <li class="nav-item">
+              <router-link to="/tutorials" class="nav-link">Tutoriais</router-link>
+           </li>
+           <li class="nav-item">
+              <router-link to="/add" class="nav-link">Adicionar</router-link>
+           </li>
+        </div>
       </nav>
 
       <div class="container mt-3">
-          <router-view />
+        <router-view />
       </div>
   </div>
 </template>
 
-
 <script>
-export default {
-  name: "app"
-};
+  export default {
+    name: "app"
+  };
 </script>
-

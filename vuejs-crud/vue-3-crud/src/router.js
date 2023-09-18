@@ -1,26 +1,31 @@
-import Vue from "vue";
-import Router from "vue-router";
+import { createWebHistory, createRouter } from "vue-router";
 
-Vue.use(Router);
+import TutorialsList from "./components/TutorialsList.vue";
+import Tutorial from "./components/Tutorial.vue";
+import AddTutorial from "./components/AddTutorial.vue";
 
-export default new Router({
-  mode: "history",
-  routes: [
+const routes = [
     {
-      path: "/",
-      alias: "/tutorials",
-      name: "tutorials",
-      component: () => import("./components/TutorialsList")
+        path: "/",
+        alias: "/tutorials",
+        name: "tutorials",
+        component : TutorialsList,
     },
     {
-      path: "/tutorials/:id",
-      name: "tutorial-details",
-      component: () => import("./components/Tutorial")
+        path: "/tutorials/:id/",
+        name: "tutorial-details",
+        component : Tutorial
     },
     {
-      path: "/add",
-      name: "add",
-      component: () => import("./components/AddTutorial")
-    }
-  ]
+        path: "/add",
+        name: "add",
+        component : AddTutorial,
+    },
+];
+
+const router = createRouter({
+    history: createWebHistory(), // Adicione os parênteses para criar a instância de createWebHistory
+    routes,
 });
+
+export default router;
