@@ -1,6 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { fetchTransactions } from "../api";
 
-const TransactionList= ({transactions}) => {
+const TransactionList= ({transactions: propTransactions}) => {
+    const [transactions, setTransactions] = useState([]);
+
+    //Criar uma função para carregar as transações
+    const loadTransactions = async () =>{
+        try{
+            const data = await fetchTransactions();
+            setTransactions(data);
+        }catch(error){
+            console.log("Erro ao carregar as transações: ", error)
+        }
+    };
+
+    useEffect(() => {
+        loadTransactions();
+    }, []);
+
     return(
         <div>
             <h2>Listar Transações</h2>
@@ -13,7 +30,7 @@ const TransactionList= ({transactions}) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {transactions.map((transaction) => (
+                    {propTransactions.map((transaction) => (
                     <tr key={transaction.id}>
                         <td>{transaction.id}</td>
                         <td>{transaction.description}</td>
