@@ -1,28 +1,27 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const api = axios.create({
-  baseURL: "http://localhost:3000",
-});
-
 const TransactionList = ({transactions}) => {
   const [setTransactions] = useState([]);
 
   useEffect(() => {
-    api.get("/transactions")
-      .then((response) => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("/api/transactions");
         const formattedTransactions = response.data.map((transaction) => ({
           id: transaction.id,
           description: transaction.description,
           amount: transaction.amount,
         }));
-
         setTransactions(formattedTransactions);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("Erro ao buscar transações", error);
-      });
-  }, [setTransactions]); 
+      }
+    };
+
+    fetchData();
+  }, [setTransactions]); // Apenas execute uma vez quando o componente montar
+
 
   return (
     <div>

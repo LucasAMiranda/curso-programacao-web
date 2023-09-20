@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import {v4 as uuidv4} from "uuid";
 
 const TransactionForm = ({addTransaction}) =>{
     //Criar um gerenciamento de estado para controlar os valores do Formulário
@@ -19,13 +20,17 @@ const TransactionForm = ({addTransaction}) =>{
 
             //Criar um objeto de transação com os valores do formulário
             const newTransaction = {
-                id: Math.random(),
+                id: uuidv4(),
                 description,
                 amount: Number(amount),
             };
 
+            const api = axios.create({
+                baseURL: "http://localhost:3001/api",
+              });
+
             //Enviar os dados para o servidor 
-            axios.post('http://localhost:3000/addTransaction', newTransaction)
+            api.post('/addTransactions', newTransaction)
             .then((response) => {
                 console.log(response.data.message); //Mensagem de sucesso
             })
