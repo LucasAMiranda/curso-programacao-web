@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const TransactionForm = ({addTransaction}) =>{
     //Criar um gerenciamento de estado para controlar os valores do Formulário
@@ -22,6 +23,12 @@ const TransactionForm = ({addTransaction}) =>{
                 description,
                 amount: Number(amount),
             };
+
+            //Enviar os dados para o servidor 
+            axios.post('http://localhost:3000/addTransaction', newTransaction)
+            .then((response) => {
+                console.log(response.data.message); //Mensagem de sucesso
+            })
 
             addTransaction(newTransaction)
             

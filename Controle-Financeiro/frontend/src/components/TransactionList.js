@@ -1,45 +1,52 @@
 import React, { useState, useEffect } from "react";
-import { fetchTransactions } from "../api";
+import axios from "axios";
 
-const TransactionList= ({transactions: propTransactions}) => {
-    const [transactions, setTransactions] = useState([]);
+const api = axios.create({
+  baseURL: "http://localhost:3000",
+});
 
-    //Criar uma função para carregar as transações
-    const loadTransactions = async () =>{
-        try{
-            const data = await fetchTransactions();
-            setTransactions(data);
-        }catch(error){
-            console.log("Erro ao carregar as transações: ", error)
-        }
-    };
+const TransactionList = ({transactions}) => {
+  const [setTransactions] = useState([]);
 
-    useEffect(() => {
-        loadTransactions();
-    }, []);
+  useEffect(() => {
+    api.get("/transactions")
+      .then((response) => {
+        const formattedTransactions = response.data.map((transaction) => ({
+          id: transaction.id,
+          description: transaction.description,
+          amount: transaction.amount,
+        }));
 
-    return(
-        <div>
-            <h2>Listar Transações</h2>
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Descrição</th>
-                        <th>Valor</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {propTransactions.map((transaction) => (
-                    <tr key={transaction.id}>
-                        <td>{transaction.id}</td>
-                        <td>{transaction.description}</td>
-                        <td>{transaction.amount}</td>
-                    </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
-    )
-}
+        setTransactions(formattedTransactions);
+      })
+      .catch((error) => {
+        console.error("Erro ao buscar transações", error);
+      });
+  }, [setTransactions]); 
+
+  return (
+    <div>
+      <h2>Listar Transações</h2>
+      <table className="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Descrição</th>
+            <th>Valor</th>
+          </tr>
+        </thead>
+        <tbody>
+          {transactions.map((transaction) => (
+            <tr key={transaction.id}>
+              <td>{transaction.id}</td>
+              <td>{transaction.description}</td>
+              <td>{transaction.amount}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
 export default TransactionList;
